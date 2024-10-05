@@ -1,0 +1,5 @@
+digraph "classes" {
+rankdir=BT
+charset="utf-8"
+"test_imu_app.TestIMUApp" [color="black", fontcolor="black", label=<{test_imu_app.TestIMUApp|<br ALIGN="LEFT"/>|test_imu_pitch_angle(req_pitch_angle)<br ALIGN="LEFT"/>test_imu_roll_angle(req_roll_angle)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+}
