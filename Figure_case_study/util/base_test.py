@@ -6,8 +6,10 @@ import sys
 
 import pytest
 import logging
-from lib.imu_comm import IMUComm
-from lib.table_control import TableController
+from util.imu_comm import IMUComm
+from util.table_control import TableController
+
+import yaml
 
 
 class BaseTest:
@@ -15,13 +17,20 @@ class BaseTest:
     logger = logging.getLogger("test_logger")
     format = "%(asctime)s|%(name)s|%(levelname)s|%(message)s"
     logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=format)
-    table_ip = "192.168.1.1"
+    
+    # Test Config data
+    with open("/Users/atharvkolhar/figure/Figure_case_study/test_config.yaml", 'r') as config:
+        config_data = yaml.safe_load(config)
+        
+    table_ip = config_data['table_ip']
+    imu_app_ip = config_data['imu_app_ip']
     roll_err = 0
     pitch_err = 0
 
     def __init__(self):
+        # Initializing the tabel control and imu communicaation
         self.tabel_ctrl = TableController(self.table_ip)
-        self.imu_comm = IMUComm()
+        self.imu_comm = IMUComm(self.imu_app_ip)
 
     def setup_class(self):
         # Setting the Motion Table to Zero degree roll and pitch
